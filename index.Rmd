@@ -1,0 +1,234 @@
+---
+title: "Compute Canada Resources"
+subtitle: "a Very Short Introduction"  
+author: 
+  - "Valentin Lucet"
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    nature:
+      slideNumberFormat: "%current%"
+      highlightStyle: github
+      highlightLines: true
+      ratio: 4:3
+      countIncrementalSlides: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  fig.width=9, fig.height=3.5, fig.retina=3,
+  out.width = "100%",
+  cache = FALSE,
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE,
+  fig.show = TRUE,
+  hiline = TRUE
+)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  title_slide_background_image = "https://ccdb.computecanada.ca/assets/compute_canada-7503fc0efc79814e88937b38630cf79a8ca10afbe46575c52a3a4faa48ad283a.png",
+  title_slide_background_size = "100%",
+  title_slide_background_position = "top",
+  text_font_size = "1.1em"
+)
+```
+
+```{r xaringanExtra-allextras, include=FALSE, warning=FALSE, echo=FALSE}
+xaringanExtra::use_tile_view()
+xaringanExtra::use_share_again()
+xaringanExtra::use_broadcast()
+xaringanExtra::use_scribble()
+xaringanExtra::use_animate_css()
+xaringanExtra::use_panelset()
+xaringanExtra::use_clipboard()
+xaringanExtra::use_fit_screen()
+xaringanExtra::use_webcam()
+```
+
+## Disclaimer
+
+This is a very short intro to Compute Canada and its resources.
+
+In no way can this replace the main source of info: the [__Compute Canada Wiki__](https://docs.computecanada.ca/wiki/Compute_Canada_Documentation).
+
+However, the wiki can be hard to read and understand, therefore I hope this will help you with feeling less lost when it comes to using CC's computers.
+
+_Note: [__Training sessions__](https://www.computecanada.ca/research-portal/technical-support/training/) are organized by the computing network, these are much more complete and I recommend you attend them. The regional partnet [Calcul Quebec](https://www.calculquebec.ca/en/academic-research-services/procedures/) also offers training_ 
+
+---
+## CC is a network
+
+<img align="right" width="300" alt="compute canada logo" src="https://www.computecanada.ca/wp-content/uploads/2015/04/BILINGUAL-CC-WEB-LOGO.png">
+
+_"Compute Canada, in partnership with regional organizations ACENET, Calcul Québec, Compute Ontario and WestGrid, leads the acceleration of research and innovation by deploying state-of-the-art advanced research computing (ARC) systems, storage and software solutions. [...]_
+
+_Our world-class team of more than 200 experts employed by 37 partner universities and research institutions across the country provide direct support to research teams."_
+
+__[List of partners](https://www.computecanada.ca/about/partners/)__
+
+---
+## What is HPC?
+
+__HPC__ stands for __H__igh-__P__erformance __C__omputing
+
+.center[
+![A diagram of hpc](https://www.datamation.com/wp-content/uploads/2020/12/high-performance-computing_5fceba2e27bfe.png)]
+
+A very good resource we will come back to many times today:
+[_Introduction to HPC: Carpentries workshop_](https://carpentries-incubator.github.io/hpc-intro/)
+
+---
+## Accessing CC 101
+
+[_(Wiki page)_](https://docs.computecanada.ca/wiki/Getting_started)
+
+1. Get your PI's __CCRI__
+
+2. [Apply for a CCDB account](https://www.computecanada.ca/research-portal/account-management/apply-for-an-account/). Make sure you select the [correct role](https://www.computecanada.ca/user-roles-to-access-resources-and-services-of-the-compute-canada-federation/). Your are likely to be a "sponsored user".
+
+3. Wait for your PI to approve your role.
+
+4. You have now access to the national systems Béluga, Cedar and Graham with your Compute Canada account. You do not need a consortium account (i.e. Calcul Quebec account).
+
+5. Choose a cluster to connect to (we will do beluga).
+
+6. Connect via SSH
+
+---
+## Connecting with SSH
+
+1. Open the terminal and type `ssh user@machine`. for example `ssh vlucet@beluga.computecanada.ca`
+
+2. You will be asked to enter your password and accept the connection. Do so for now.
+
+3. We can later set up what is called "ssh keys", which will allow us not to have to type in the password every time. See [this page of the wiki](https://docs.computecanada.ca/wiki/SSH_Keys).
+
+Using windows? You need windows 10. To unable SSH in windows 10, see [this tutorial](https://www.howtogeek.com/336775/how-to-enable-and-use-windows-10s-built-in-ssh-commands/). If you are having trouble also see [this help page](https://docs.microsoft.com/en-us/windows/terminal/tutorials/ssh#:~:text=You%20can%20start%20an%20SSH,a%20profile%20in%20your%20settings.).
+
+---
+## Software environment
+
+_[(List of useful webinars)](https://docs.computecanada.ca/wiki/Getting_started_with_the_new_national_systems)_
+
+The clusters run Linux CentOS and has a lot of packages available (R. python, etc..), including utilities to run things in parallel. The Job scheduler is SLURM.
+
+In order to access things like R, python, or CUDA, you need to __load software modules__. Make sure to check with version of a given module you need (for example R 3.6 or R 4.1).
+
+```{bash, eval = FALSE}
+module list         # which modules are loaded    
+module avail        # which modules are available
+module spider r     # lower case is important here
+module load r/4.1.0 # load R 4.1.0
+module list         # which modules are loaded 
+```
+
+---
+## The file system on the cluster
+
+File systems on the clisters  are shared and should be used responsibly. They are designed in such a way that users should avoid storing 1000s of small files (<1MB in size).
+
+The system is broken down as such:
+
+* `\home` Contains all users home directories. You can only access yours. For long term storage (not for files that need read and write). __max 50 GB / 500k files__ 
+
+* `\project` For files related to a computing project or resource allocation. You can put files that need read and write there and the storage is also long term. __max 1 TB / 500k files (per user)__ 
+
+* `\scratch` Same than for project files but purged periodically. __max 20 TB / 1000k files (per user, there is also a group limit)__ 
+
+* `\tmp` Local to the node, only for storage of temporary files during a job or computing operation.
+
+---
+## Useful Linux commands to navigate the file system
+
+On the cluster, you are navigating inside a linux computer. You need to learn how to use the terminal to move around the file system with classic linux commands.
+
+```{bash, eval = FALSE}
+ls     # list files in directory
+ls -la # list also the hidden files and list more info
+cd     # navigate to a directory
+cd -   # navigate to previous directory
+du -h  # check disk usage
+df -h  # check free space on disk
+find -type f -size +100M # Find all files larger than 100 Mb
+```
+
+---
+## Transfering files
+
+Usually 3 options:
+
+* Use the `scp` or "secure copy" command 
+```{bash, eval = FALSE}
+# copies my readme to the scratch space
+scp README.md vlucet@beluga.computecanada.ca:scratch/
+
+# copies the folder "outputs" in my scratch space 
+# onto my computer documents folder
+scp -r vlucet@beluga.computecanada.ca:scratch/outputs ~/Documents
+```
+
+* Use version control software (for non data files!). The clusters have git installed as they are linux computers.
+
+* Use GLOBUS. It is a browser interface with the clusters' file systems, allowing you to transfer files and sync whole directories. See [this wiki page]() for setting it up.
+
+---
+## RAS vs. RAC
+
+* 20% of compute cycles under RAS
+ - Rapid Access Service 
+ - "Fair share system" controls priority and resource allocation
+ - You can use this right away
+
+* 80% of compute cycles under RAC
+ - Resource Allocation Competitions
+ - PIs apply for extra resources
+ - If you submit jobs under a RAC, they will tend to be scheduled faster
+ 
+Check with your PI whether you have RAC, and whether you are encouraged to use it. In general you will want to prototype and troubleshoot your jobs under RAS before submitting under RAC.
+
+---
+## Computing jobs
+
+On the cluster, you have 2 options to run computing jobs:
+
+1. Send jobs to the SLURM job manager with `sbatch`. 
+
+2. Start an interactive session within the terminal with `salloc`
+
+Remember: DO NOT start running stuff when you just log in. 
+
+When you log in, you actually arrive on the __login node__, which is not shared with everyone. The only thing you should be doing on the login node is installing packages or moving files around.
+
+---
+## Submitting jobs
+
+---
+## Using interactive sessions
+
+---
+## Running RStudio
+
+To run RStudio on CC's resources, you need to start an interactive session in which a jupyter lab notebook is running. Rstudio runs on top of jupyter lab for the time of the allocation.
+
+Be careful, when using Rstudio and if you are running things in parallel, make sure you do ask for more cores than you have requested with `salloc`: RStudio will "see" all the cores but wont have access to more than what you asked for.
+
+Full tutorial on the wiki:
+https://docs.computecanada.ca/wiki/JupyterNotebook#RStudio_Launcher
+
+---
+# Thanks!
+
+Slides created via the R packages:
+
+[**xaringan**](https://github.com/yihui/xaringan)<br>
+[gadenbuie/xaringanthemer](https://github.com/gadenbuie/xaringanthemer)

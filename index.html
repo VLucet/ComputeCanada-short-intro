@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Compute Canada Resources</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Valentin Lucet" />
+    <meta name="date" content="2021-08-01" />
+    <script src="index_files/header-attrs/header-attrs.js"></script>
+    <link href="index_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="index_files/tile-view/tile-view.js"></script>
+    <script src="index_files/clipboard/clipboard.min.js"></script>
+    <link href="index_files/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="index_files/shareon/shareon.min.js"></script>
+    <link href="index_files/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="index_files/xaringanExtra-shareagain/shareagain.js"></script>
+    <script src="index_files/js-cookie/js.cookie.js"></script>
+    <script src="index_files/peerjs/peerjs.min.js"></script>
+    <script src="index_files/tiny.toast/toast.min.js"></script>
+    <link href="index_files/xaringanExtra-broadcast/broadcast.css" rel="stylesheet" />
+    <script src="index_files/xaringanExtra-broadcast/broadcast.js"></script>
+    <script src="index_files/fabric/fabric.min.js"></script>
+    <link href="index_files/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="index_files/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link href="index_files/animate.css/animate.xaringan.css" rel="stylesheet" />
+    <link href="index_files/panelset/panelset.css" rel="stylesheet" />
+    <script src="index_files/panelset/panelset.js"></script>
+    <link href="index_files/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="index_files/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <script src="index_files/xaringanExtra_fit-screen/fit-screen.js"></script>
+    <script src="index_files/xaringanExtra-webcam/webcam.js"></script>
+    <script id="xaringanExtra-webcam-options" type="application/json">{"width":"200","height":"200","margin":"1em"}</script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Compute Canada Resources
+## a Very Short Introduction
+### Valentin Lucet
+### 2021-08-01
+
+---
+
+
+
+
+
+
+
+
+## Disclaimer
+
+This is a very short intro to Compute Canada and its resources.
+
+In no way can this replace the main source of info: the [__Compute Canada Wiki__](https://docs.computecanada.ca/wiki/Compute_Canada_Documentation).
+
+However, the wiki can be hard to read and understand, therefore I hope this will help you with feeling less lost when it comes to using CC's computers.
+
+_Note: [__Training sessions__](https://www.computecanada.ca/research-portal/technical-support/training/) are organized by the computing network, these are much more complete and I recommend you attend them. The regional partnet [Calcul Quebec](https://www.calculquebec.ca/en/academic-research-services/procedures/) also offers training_ 
+
+---
+## CC is a network
+
+&lt;img align="right" width="300" alt="compute canada logo" src="https://www.computecanada.ca/wp-content/uploads/2015/04/BILINGUAL-CC-WEB-LOGO.png"&gt;
+
+_"Compute Canada, in partnership with regional organizations ACENET, Calcul Québec, Compute Ontario and WestGrid, leads the acceleration of research and innovation by deploying state-of-the-art advanced research computing (ARC) systems, storage and software solutions. [...]_
+
+_Our world-class team of more than 200 experts employed by 37 partner universities and research institutions across the country provide direct support to research teams."_
+
+__[List of partners](https://www.computecanada.ca/about/partners/)__
+
+---
+## What is HPC?
+
+__HPC__ stands for __H__igh-__P__erformance __C__omputing
+
+.center[
+![A diagram of hpc](https://www.datamation.com/wp-content/uploads/2020/12/high-performance-computing_5fceba2e27bfe.png)]
+
+A very good resource we will come back to many times today:
+[_Introduction to HPC: Carpentries workshop_](https://carpentries-incubator.github.io/hpc-intro/)
+
+---
+## Accessing CC 101
+
+[_(Wiki page)_](https://docs.computecanada.ca/wiki/Getting_started)
+
+1. Get your PI's __CCRI__
+
+2. [Apply for a CCDB account](https://www.computecanada.ca/research-portal/account-management/apply-for-an-account/). Make sure you select the [correct role](https://www.computecanada.ca/user-roles-to-access-resources-and-services-of-the-compute-canada-federation/). Your are likely to be a "sponsored user".
+
+3. Wait for your PI to approve your role.
+
+4. You have now access to the national systems Béluga, Cedar and Graham with your Compute Canada account. You do not need a consortium account (i.e. Calcul Quebec account).
+
+5. Choose a cluster to connect to (we will do beluga).
+
+6. Connect via SSH
+
+---
+## Connecting with SSH
+
+1. Open the terminal and type `ssh user@machine`. for example `ssh vlucet@beluga.computecanada.ca`
+
+2. You will be asked to enter your password and accept the connection. Do so for now.
+
+3. We can later set up what is called "ssh keys", which will allow us not to have to type in the password every time. See [this page of the wiki](https://docs.computecanada.ca/wiki/SSH_Keys).
+
+Using windows? You need windows 10. To unable SSH in windows 10, see [this tutorial](https://www.howtogeek.com/336775/how-to-enable-and-use-windows-10s-built-in-ssh-commands/). If you are having trouble also see [this help page](https://docs.microsoft.com/en-us/windows/terminal/tutorials/ssh#:~:text=You%20can%20start%20an%20SSH,a%20profile%20in%20your%20settings.).
+
+---
+## Software environment
+
+_[(List of useful webinars)](https://docs.computecanada.ca/wiki/Getting_started_with_the_new_national_systems)_
+
+The clusters run Linux CentOS and has a lot of packages available (R. python, etc..), including utilities to run things in parallel. The Job scheduler is SLURM.
+
+In order to access things like R, python, or CUDA, you need to __load software modules__. Make sure to check with version of a given module you need (for example R 3.6 or R 4.1).
+
+
+```bash
+module list         # which modules are loaded    
+module avail        # which modules are available
+module spider r     # lower case is important here
+module load r/4.1.0 # load R 4.1.0
+module list         # which modules are loaded 
+```
+
+---
+## The file system on the cluster
+
+File systems on the clisters  are shared and should be used responsibly. They are designed in such a way that users should avoid storing 1000s of small files (&lt;1MB in size).
+
+The system is broken down as such:
+
+* `\home` Contains all users home directories. You can only access yours. For long term storage (not for files that need read and write). __max 50 GB / 500k files__ 
+
+* `\project` For files related to a computing project or resource allocation. You can put files that need read and write there and the storage is also long term. __max 1 TB / 500k files (per user)__ 
+
+* `\scratch` Same than for project files but purged periodically. __max 20 TB / 1000k files (per user, there is also a group limit)__ 
+
+* `\tmp` Local to the node, only for storage of temporary files during a job or computing operation.
+
+---
+## Useful Linux commands to navigate the file system
+
+On the cluster, you are navigating inside a linux computer. You need to learn how to use the terminal to move around the file system with classic linux commands.
+
+
+```bash
+ls     # list files in directory
+ls -la # list also the hidden files and list more info
+cd     # navigate to a directory
+cd -   # navigate to previous directory
+du -h  # check disk usage
+df -h  # check free space on disk
+find -type f -size +100M # Find all files larger than 100 Mb
+```
+
+---
+## Transfering files
+
+Usually 3 options:
+
+* Use the `scp` or "secure copy" command 
+
+```bash
+# copies my readme to the scratch space
+scp README.md vlucet@beluga.computecanada.ca:scratch/
+
+# copies the folder "outputs" in my scratch space 
+# onto my computer documents folder
+scp -r vlucet@beluga.computecanada.ca:scratch/outputs ~/Documents
+```
+
+* Use version control software (for non data files!). The clusters have git installed as they are linux computers.
+
+* Use GLOBUS. It is a browser interface with the clusters' file systems, allowing you to transfer files and sync whole directories. See [this wiki page]() for setting it up.
+
+---
+## RAS vs. RAC
+
+* 20% of compute cycles under RAS
+ - Rapid Access Service 
+ - "Fair share system" controls priority and resource allocation
+ - You can use this right away
+
+* 80% of compute cycles under RAC
+ - Resource Allocation Competitions
+ - PIs apply for extra resources
+ - If you submit jobs under a RAC, they will tend to be scheduled faster
+ 
+Check with your PI whether you have RAC, and whether you are encouraged to use it. In general you will want to prototype and troubleshoot your jobs under RAS before submitting under RAC.
+
+---
+## Computing jobs
+
+On the cluster, you have 2 options to run computing jobs:
+
+1. Send jobs to the SLURM job manager with `sbatch`. 
+
+2. Start an interactive session within the terminal with `salloc`
+
+Remember: DO NOT start running stuff when you just log in. 
+
+When you log in, you actually arrive on the __login node__, which is not shared with everyone. The only thing you should be doing on the login node is installing packages or moving files around.
+
+---
+## Submitting jobs
+
+---
+## Using interactive sessions
+
+---
+## Running RStudio
+
+To run RStudio on CC's resources, you need to start an interactive session in which a jupyter lab notebook is running. Rstudio runs on top of jupyter lab for the time of the allocation.
+
+Be careful, when using Rstudio and if you are running things in parallel, make sure you do ask for more cores than you have requested with `salloc`: RStudio will "see" all the cores but wont have access to more than what you asked for.
+
+Full tutorial on the wiki:
+https://docs.computecanada.ca/wiki/JupyterNotebook#RStudio_Launcher
+
+---
+# Thanks!
+
+Slides created via the R packages:
+
+[**xaringan**](https://github.com/yihui/xaringan)&lt;br&gt;
+[gadenbuie/xaringanthemer](https://github.com/gadenbuie/xaringanthemer)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "4:3",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
