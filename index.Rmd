@@ -286,8 +286,32 @@ cd ~/scratch/ComputeCanada_short_intro/
 sbatch example_job.sh
 ```
 
+5. Watch with `squeue`, `sacct` and your email
+
+---
+## Tips and tricks
+
+- Schedule with 10-20% of time and memory overhead
+
+- The more constraints being provided, the more time the job will take to run
+
+- For long jobs, you can log into the node on which the job is running and monitor usage (can demonstrate later on a bigger job)
+
+- Watch webinar on [common mistakes to avoid](https://www.youtube.com/watch?v=TOYsh0TPy2U).
+
+
 ---
 ## Using interactive sessions
+
+You can run an interactive session. These are good for troubleshooting code and testing things manually. They tend to be faster to schedule.
+
+For example:
+```{bash, eval = FALSE}
+# Asking for an hour with 4 cores and a total of 4GB of ram
+salloc --time=1:0:0 --ntasks=1 --cpus-per-task=4 --mem-per-cpu=1024M --account=def-pedersen
+```
+
+Once the session starts, you need to reload any modules you might have loaded before.
 
 ---
 ## Running RStudio
