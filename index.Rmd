@@ -84,7 +84,7 @@ __HPC__ stands for __H__igh-__P__erformance __C__omputing
 .center[
 ![A diagram of hpc](https://www.datamation.com/wp-content/uploads/2020/12/high-performance-computing_5fceba2e27bfe.png)]
 
-A very good resource we will come back to many times today:
+A very good resource I borrowed a lot from:
 [_Introduction to HPC: Carpentries workshop_](https://carpentries-incubator.github.io/hpc-intro/)
 
 ---
@@ -165,9 +165,11 @@ find -type f -size +100M # Find all files larger than 100 Mb
 ---
 ## Transfering files
 
-Usually 3 options:
+A few options:
 
-* Use the `scp` or "secure copy" command 
+* Use commands like `curl` or `wget` for files on the internet.
+
+* Use the `scp` or "secure copy" command.
 ```{bash, eval = FALSE}
 # copies my readme to the scratch space
 scp README.md vlucet@beluga.computecanada.ca:scratch/
@@ -179,7 +181,9 @@ scp -r vlucet@beluga.computecanada.ca:scratch/outputs ~/Documents
 
 * Use version control software (for non data files!). The clusters have git installed as they are linux computers.
 
-* Use GLOBUS. It is a browser interface with the clusters' file systems, allowing you to transfer files and sync whole directories. See [this wiki page]() for setting it up.
+* Use an interface like GLOBUS. It is a browser interface with the clusters' file systems, allowing you to transfer files and sync whole directories. See [this wiki page]() for setting it up.
+
+* Use third party software like FileZilla.
 
 ---
 ## RAS vs. RAC
@@ -201,9 +205,9 @@ Check with your PI whether you have RAC, and whether you are encouraged to use i
 
 On the cluster, you have 2 options to run computing jobs:
 
-1. Send jobs to the SLURM job manager with `sbatch`. 
+1. Send jobs to the SLURM job manager with the command `sbatch`. 
 
-2. Start an interactive session within the terminal with `salloc`
+2. Start an interactive session within the terminal with the command `salloc`
 
 Remember: DO NOT start running stuff when you just log in. 
 
@@ -211,6 +215,76 @@ When you log in, you actually arrive on the __login node__, which is not shared 
 
 ---
 ## Submitting jobs
+
+A "job" is usually a bash script that runs:
+ - For a predefined time
+ - On a predefined amount of cores (CPUS)
+ - With a predefined amount of memory (RAM)
+
+---
+## Example of batch script
+
+```{bash, eval = FALSE}
+#!/bin/bash
+#SBATCH --account=def-pedersen
+#SBATCH --time=1:00:00
+#SBATCH --job-name=analyse_taxonomy
+#SBATCH --cpu-per-task=4
+#SBATCH --mem=32GB
+#SBATCH --output=analyse_taxonomy.out
+#SBATCH --mail-user=valentin.lucet@gmail.com
+#SBATCH --mail-type=END
+#SBATCH --mail-type=FAIL
+
+export OMP_NUM_THREADS=$SLURM_JOB_CPUS_PER_NODE
+
+module load nixpkgs/16.09 gcc r/4.1.0 gdal
+
+Rscript /home/vlucet/scratch/thesis/scripts/1_taxonomy_analysis.R
+```
+
+---
+## SLURM commands
+
+- `sbatch`, to submit jobs.
+```{bash, eval = FALSE}
+sbatch path_to_job_script.sh
+```
+
+- `squeue`, to list current active or submitted jobs.
+```{bash, eval = FALSE}
+squeue -u vlucet # -u for user 
+```
+
+- `sacct`, to list the completed jobs and also to examine how many resources have been used by a given job.
+```{bash, eval = FALSE}
+sacct # no arguments needed
+```
+
+- `scancel`, to kill a running job or cancel a submitted job.
+```{bash, eval = FALSE}
+scancel <job_id> # insert the job id to cancel the job
+```
+
+--- 
+## An example job and script
+
+1. Log in and move to scratch with `cd scratch`
+
+2. Clone this repo 
+```{bash, eval = FALSE}
+git clone https://github.com/VLucet/ComputeCanada_short_intro.git
+```
+
+3. Move into the scripts folder 
+```{bash, eval = FALSE}
+cd ~/scratch/ComputeCanada_short_intro/
+```
+
+4. Schedule with `sbatch`
+```{bash, eval = FALSE}
+sbatch example_job.sh
+```
 
 ---
 ## Using interactive sessions
