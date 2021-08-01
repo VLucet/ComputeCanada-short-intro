@@ -325,6 +325,7 @@ Be careful, when using Rstudio and if you are running things in parallel, make s
 [Full tutorial on the wiki](https://docs.computecanada.ca/wiki/JupyterNotebook#RStudio_Launcher).
 
 ---
+class: center, middle
 # Thanks!
 
 Slides created via the R packages:
