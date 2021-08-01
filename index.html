@@ -219,6 +219,8 @@ A "job" is usually a bash script that runs:
  - For a predefined time
  - On a predefined amount of cores (CPUS)
  - With a predefined amount of memory (RAM)
+ 
+If you want to run an R script you will need to write a bash script that (1) load R as a software module and (2) call `Rscript` to run your script.
 
 ---
 ## Example of batch script
@@ -270,7 +272,7 @@ sacct # no arguments needed
 scancel &lt;job_id&gt; # insert the job id to cancel the job
 ```
 
---- 
+---
 ## An example job and script
 
 1. Log in and move to scratch with `cd scratch`
