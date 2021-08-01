@@ -322,8 +322,7 @@ To run RStudio on CC's resources, you need to start an interactive session in wh
 
 Be careful, when using Rstudio and if you are running things in parallel, make sure you do ask for more cores than you have requested with `salloc`: RStudio will "see" all the cores but wont have access to more than what you asked for.
 
-Full tutorial on the wiki:
-https://docs.computecanada.ca/wiki/JupyterNotebook#RStudio_Launcher
+[Full tutorial on the wiki](https://docs.computecanada.ca/wiki/JupyterNotebook#RStudio_Launcher).
 
 ---
 # Thanks!
