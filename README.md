@@ -1,3 +1,3 @@
 ## Compute Canada resources: a very short introduction
 
-https://vlucet.github.io/ComputeCanada_short_intro/#1
+[Link to the slides](https://vlucet.github.io/ComputeCanada_short_intro/#1)
